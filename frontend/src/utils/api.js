@@ -10,11 +10,40 @@ const listarAnotacao = (setAnotacao) => {
 };
 
 const adicionarAnotacao = (text, setText, setAnotacao) => {
-  axios.post(`${baseUrl}/adicionar`, { text }).then((data) => {
-    console.log(data);
-    setText("");
-    listarAnotacao(setAnotacao);
-  });
+  axios
+    .post(`${baseUrl}/adicionar`, { text })
+    .then((data) => {
+      console.log(data);
+      setText("");
+      listarAnotacao(setAnotacao);
+    })
+    .catch((err) => console.log(err));
 };
 
-export { listarAnotacao, adicionarAnotacao };
+const atualizarAnotacao = (id, text, setAnotacao, setText, setAtualiza) => {
+  axios
+    .post(`${baseUrl}/atualizar`, { _id: id, text })
+    .then((data) => {
+      setText("");
+      setAtualiza(false);
+      listarAnotacao(setAnotacao);
+    })
+    .catch((err) => console.log(err));
+};
+
+const deletarAnotacao = (_id, setAnotacao) => {
+  axios
+    .post(`${baseUrl}/deletar`, { _id })
+    .then((data) => {
+      console.log(data);
+      listarAnotacao(setAnotacao);
+    })
+    .catch((err) => console.log(err));
+};
+
+export {
+  listarAnotacao,
+  adicionarAnotacao,
+  atualizarAnotacao,
+  deletarAnotacao,
+};

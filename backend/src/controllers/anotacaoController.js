@@ -8,10 +8,13 @@ module.exports.encontrarAnotacao = async (req, res) => {
 module.exports.adicionarAnotacao = async (req, res) => {
   const { text } = req.body;
 
-  anotacaoModel.create({ text }).then((data) => {
-    console.log("Adicionado com sucesso!");
-    res.send(data);
-  });
+  anotacaoModel
+    .create({ text })
+    .then((data) => {
+      console.log("Adicionado com sucesso!");
+      res.send(data);
+    })
+    .catch((err) => console.log(err));
 };
 
 module.exports.atualizarAnotacao = async (req, res) => {
